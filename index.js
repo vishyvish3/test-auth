@@ -132,7 +132,7 @@ app.put("/change-password/", async (req, res) => {
 app.post("/register", async (req, res) => {
   try {
     let client = await mongodb.connect(dbUrl);
-    let db = client.db("emailId_db");
+    let db = client.db("test");
     console.log(db)
     let data = await db.collection("users").findOne({ email: req.body.email });
     if (data) {
@@ -160,7 +160,7 @@ app.post("/login", async (req, res) => {
   try {
     let email = req.body.email;
     let client = await mongodb.connect(dbUrl);
-    let db = client.db("emailId_db");
+    let db = client.db("test");
     let data = await db.collection("users").findOne({ email });
     if (data) {
       let isaMatch = await bcrypt.compare(req.body.password, data.password);
