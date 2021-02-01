@@ -28,9 +28,6 @@ var transporter = nodemailer.createTransport({
   auth: {
     user: process.env.email,
     pass: process.env.password
-  },
-  tls: {
-    rejectUnauthorized: false
   }
 });
 
@@ -69,7 +66,7 @@ app.put("/reset-password", async (req, res) => {
       await transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
            res.status(401).json({
-      message: "Internal mail Server Error"
+      message: "Internal mail Server orginal Error 1"
     });
         } else {
           console.log(info, "mail sent")
@@ -90,7 +87,7 @@ app.put("/reset-password", async (req, res) => {
   }
   catch (error) {
     res.status(500).json({
-      message: "Internal Server gmail Error"
+      message: error
     });
   }
 });
