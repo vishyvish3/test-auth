@@ -46,6 +46,7 @@ app.put("/reset-password", async (req, res) => {
     let client = await mongodb.connect(dbUrl);
     let db = client.db("emailId_db");
     let result = await db.collection("users").findOne({ email: req.body.email });
+    console.log("result", result)
     let salt = await bcrypt.genSalt(10);
 
     if (result) {
