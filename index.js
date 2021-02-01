@@ -43,14 +43,16 @@ var mailOptions = {
 app.put("/reset-password", async (req, res) => {
   console.log("test1");
   try {
+    console.log("working");
     let client = await mongodb.connect(dbUrl);
     let db = client.db("emailId_db");
+    console.log("goingto find in db");
     let result = await db.collection("users").findOne({ email: req.body.email });
-    console.log("result", result)
+    console.log(result)
     let salt = await bcrypt.genSalt(10);
 
     if (result) {
-      console.log("test2");
+      
       let randomString = { 'randomString': salt };
       console.log("randome string is:" + JSON.stringify(randomString) + " and salt is: " + salt);
       await db.collection("users").findOneAndUpdate({ email: req.body.email }, { $set: randomString });
