@@ -45,7 +45,7 @@ app.put("/reset-password", async (req, res) => {
   try {
     console.log("working");
     let client = await mongodb.connect(dbUrl);
-    let db = client.db("emailId_db");
+    let db = client.db("test");
     console.log("goingto find in db");
     let result = await db.collection("users").findOne({ email: req.body.email });
     console.log(result)
@@ -104,7 +104,7 @@ app.put("/change-password/", async (req, res) => {
   try {
 
     let client = await mongodb.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-    let db = client.db("emailId_db");
+    let db = client.db("test");
     let checkString = await db.collection("users").find({ $and: [{ _id: objectId(req.query.id) }, { "randomString": req.query.rs }] }).toArray();
     if (checkString.length !== 0) {
       let salt = await bcrypt.genSalt(10);
