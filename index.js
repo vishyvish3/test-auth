@@ -44,14 +44,14 @@ var mailOptions = {
 
 
 app.put("/reset-password", async (req, res) => {
-  console.log("test1");
+ 
   try {
-    console.log("working");
+    
     let client = await mongodb.connect(dbUrl);
     let db = client.db("test");
-    console.log("goingto find in db");
+
     let result = await db.collection("users").findOne({ email: req.body.email });
-    console.log(result)
+    console.log('result',result)
     let salt = await bcrypt.genSalt(10);
 
     if (result) {
