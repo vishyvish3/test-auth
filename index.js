@@ -51,7 +51,7 @@ app.post("/reset-password", async (req, res) => {
     let db = client.db("test");
 
     let result = await db.collection("users").findOne({ email: req.body.email });
-    console.log('result',result)
+  
     let salt = await bcrypt.genSalt(10);
 
     if (result) {
@@ -73,9 +73,7 @@ app.post("/reset-password", async (req, res) => {
       mailOptions.html = resetMailToBeSend;
       await transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
-           res.status(401).json({
-      message: "Internal mail Server orginal Error 1"
-    });
+         console.log(err, "error")
         } else {
           console.log(info, "mail sent")
         }
