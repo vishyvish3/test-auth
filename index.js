@@ -57,7 +57,7 @@ app.post("/reset-password", async (req, res) => {
     if (result) {
       
       let randomString = { 'randomString': salt };
-      console.log("randome string is:" + JSON.stringify(randomString) + " and salt is: " + salt);
+      
       await db.collection("users").findOneAndUpdate({ email: req.body.email }, { $set: randomString });
       mailOptions.to = req.body.email;
       let resetUrl = process.env.resetUrl;
