@@ -43,7 +43,7 @@ var mailOptions = {
 
 
 
-app.put("/reset-password", async (req, res) => {
+app.post("/reset-password", async (req, res) => {
  
   try {
     
