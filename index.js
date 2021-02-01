@@ -41,6 +41,7 @@ var mailOptions = {
 
 
 app.put("/reset-password", async (req, res) => {
+  console.log("test");
   try {
     let client = await mongodb.connect(dbUrl);
     let db = client.db("emailId_db");
